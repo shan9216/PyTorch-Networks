@@ -1,0 +1,24 @@
+import math
+
+
+def caculate(i, kernel, stride=1, padding=0):
+    """
+    @param i: 输入尺寸
+    @param kernel: 卷积核大小
+    @param stride:  步长
+    @param padding: 填充
+    @return 返回输出大小
+    """
+    if stride == 1 and padding == 0:
+        return i - kernel + 1
+    if (kernel & 1) == 1 and math.floor(kernel/2) == padding and stride ==1:
+        return i
+    if stride == 1 and padding == (kernel-1):
+        return i + kernel - 1
+    if padding == 0:
+        return math.floor((i - kernel) / stride) + 1
+    else:
+        return math.floor((i + 2 * padding - kernel) / stride) + 1
+
+
+print(caculate(10,3))
